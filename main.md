@@ -1,25 +1,47 @@
 # 1. O que é
 
-Servidores são básicamente computadores
+Servidores são basicamente computadores — a diferença não é o hardware em si, 
+é o **papel**: uma máquina dedicada a ficar ligada o tempo todo, escutando 
+requisições e entregando respostas/recursos pra outras máquinas (clientes).
 
+- Pode ser um computador físico dedicado (data center, on-premise)
+- Pode ser uma máquina virtual (VM) numa cloud (AWS EC2, GCP Compute Engine)
+- Pode ser até seu próprio notebook rodando um `uvicorn` — tecnicamente, 
+  nesse momento, ele é um servidor
+
+O que define "servidor" não é o tamanho ou a marca, é a **função**: estar 
+sempre disponível, escutando portas, esperando conexões.
 
 # 2. Estrutura (Hardware)
-- PLACA-MÃE
-- CPU
-- GPU
-- RAM
-- HD/SSD
 
+- **Placa-mãe** — conecta todos os componentes entre si
+- **CPU** — processa as instruções, lida com lógica geral e requisições
+- **GPU** — processamento paralelo; essencial em servidores de ML/IA 
+  (treino e inferência de modelos)
+- **RAM** — memória volátil, guarda dados em uso ativo (quanto mais RAM, 
+  mais conexões/processos simultâneos o servidor aguenta)
+- **HD/SSD** — armazenamento persistente (SSD é padrão hoje em servidores 
+  por velocidade de I/O)
+- **Placa de rede (NIC)** — component que faltou! É por ela que o servidor 
+  literalmente se conecta à rede, envia/recebe pacotes (tem IP associado a ela)
+- **Fonte de alimentação (PSU)** — em servidores reais, geralmente redundante 
+  (duas fontes, caso uma falhe)
+
+## Diferença de hardware servidor vs desktop comum
+
+| Componente | Servidor | Desktop comum |
+|------------|----------|----------------|
+| CPU | Muitos núcleos, otimizado pra multitarefa | Poucos núcleos, otimizado pra tarefas únicas |
+| RAM | ECC (correção de erro), grande volume | Comum, sem correção de erro |
+| Disco | RAID (redundância), hot-swap | Único disco, sem redundância |
+| Uptime esperado | 24/7, anos sem desligar | Liga/desliga normal |
 # 3. Rede
-- IP: Ip é um endereço virtual de uma máquina, toda máquina possui, podendo ser:
+- IP: É um endereço virtual de uma máquina, toda máquina possui, podendo ser:
     * Público = Pode ser acessado diretamente pela internet
     * Privado = Não pode ser acessado diretamente pela internet
     Todo IP Possui uma versão, as mais famosas são:
     - IPv4 = Um IP de 4 componentes (octetos), cada um de 0-255Ex: 192.168.1.1
     - IPv6 = Um IP de 8 componentes (grupos hexadecimais) Ex: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
-
-- Gateway
-- DNS
 
 # 4. Portas
 
