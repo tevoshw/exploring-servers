@@ -22,7 +22,7 @@ sempre disponível, escutando portas, esperando conexões.
   mais conexões/processos simultâneos o servidor aguenta)
 - **HD/SSD** — armazenamento persistente (SSD é padrão hoje em servidores 
   por velocidade de I/O)
-- **Placa de rede (NIC)** — component que faltou! É por ela que o servidor 
+- **Placa de rede (NIC)** É por ela que o servidor 
   literalmente se conecta à rede, envia/recebe pacotes (tem IP associado a ela)
 - **Fonte de alimentação (PSU)** — em servidores reais, geralmente redundante 
   (duas fontes, caso uma falhe)
@@ -36,12 +36,45 @@ sempre disponível, escutando portas, esperando conexões.
 | Disco | RAID (redundância), hot-swap | Único disco, sem redundância |
 | Uptime esperado | 24/7, anos sem desligar | Liga/desliga normal |
 # 3. Rede
-- IP: É um endereço virtual de uma máquina, toda máquina possui, podendo ser:
-    * Público = Pode ser acessado diretamente pela internet
-    * Privado = Não pode ser acessado diretamente pela internet
-    Todo IP Possui uma versão, as mais famosas são:
-    - IPv4 = Um IP de 4 componentes (octetos), cada um de 0-255Ex: 192.168.1.1
-    - IPv6 = Um IP de 8 componentes (grupos hexadecimais) Ex: 2001:0db8:85a3:0000:0000:8a2e:0370:7334
+
+- **IP**: É um endereço virtual de uma máquina, toda máquina possui, podendo ser:
+    * **Público** = Roteável globalmente pela internet. Alcançável diretamente 
+      de qualquer lugar (se não houver firewall bloqueando).
+    * **Privado** = Só existe/é reconhecido dentro da própria rede local. 
+      Não é roteável pela internet — pra sair, precisa de um intermediário 
+      (roteador/NAT) que "empresta" um IP público.
+
+    Todo IP possui uma versão, as mais famosas são:
+    - **IPv4** = Um IP de 4 componentes (octetos), cada um de 0-255. Ex: `192.168.1.1`
+    - **IPv6** = Um IP de 8 componentes (grupos hexadecimais). Ex: `2001:0db8:85a3:0000:0000:8a2e:0370:7334`
+
+## Público vs Privado, na prática
+
+- **Máquinas na mesma rede local** (mesmo range de IP privado) se comunicam 
+  **direto**, sem precisar de IP público nem intermediário.
+- **Máquinas em redes diferentes** (cidades/redes distintas) só se comunicam 
+  através de **IPs públicos**, porque só eles são únicos e roteáveis no mundo todo.
+- **IP privado não consegue "aparecer" sozinho na internet** — precisa de um 
+  intermediário (roteador de casa, NAT Gateway na AWS) que faz a tradução 
+  IP privado ↔ IP público (chamado **NAT**).
+- **IP público não precisa de tradução** — só precisa de uma conexão com a 
+  internet (ex: Internet Gateway, na AWS).
+
+## DNS
+
+DNS (Domain Name System) é o sistema responsável por traduzir nomes de domínio em endereços IP.
+
+Computadores se comunicam usando endereços IP, mas nós normalmente usamos nomes como google.com. O DNS faz essa tradução.
+
+google.com
+    ↓
+
+   DNS
+   ↓
+
+142.250.x.x
+
+> Um exemplo de um provedor de DNS é o cloudfare
 
 # 4. Portas
 
